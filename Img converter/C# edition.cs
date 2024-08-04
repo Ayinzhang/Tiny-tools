@@ -6,7 +6,7 @@ Console.WriteLine("Choose Instruction:\n 0 - Grey\n 1 - Transparent\n 2 - Stroke
 
 switch (cnt)
 {
-    case 0: 
+    case 0:
         Console.WriteLine("Input if reverse (0 for normal, 1 for reverse): ");
         int reverse = int.Parse(Console.ReadLine());
         foreach (string file in files)
@@ -25,7 +25,7 @@ switch (cnt)
                 src.Save(file.Replace(".jpg", "_new.png").Replace(".png", "_new.png"), ImageFormat.Png);
             }
         break;
-    case 1: 
+    case 1:
         Console.WriteLine("Input transparent value: ");
         int transparentValue = int.Parse(Console.ReadLine());
         foreach (string file in files)
@@ -40,7 +40,7 @@ switch (cnt)
                         if (sumValue > transparentValue) dst.SetPixel(j, i, Color.FromArgb(0, 255, 255, 255));
                         else dst.SetPixel(j, i, Color.FromArgb(255, pixelColor.R, pixelColor.G, pixelColor.B));
                     }
-                dst.Save(file.Replace(".jpg", "_new.png").Replace(".png", "_new.png"), ImageFormat.Png); 
+                dst.Save(file.Replace(".jpg", "_new.png").Replace(".png", "_new.png"), ImageFormat.Png);
             }
         break;
     case 2:
@@ -71,24 +71,21 @@ switch (cnt)
                                           - (lj > 0 ? tmp[rj, li] : 0) + (li > 0 && lj > 0 ? tmp[lj, li] : 0),
                                  numPixels = (ri - li + 1) * (rj - lj + 1), average = areaSum / numPixels;
                             Color pixelColor = src.GetPixel(j, i);
-                            (int r, int g, int b) = (Math.Max(pixelColor.R - (int)average, 0), 
+                            (int r, int g, int b) = (Math.Max(pixelColor.R - (int)average, 0),
                                 Math.Max(pixelColor.G - (int)average, 0), Math.Max(pixelColor.B - (int)average, 0));
                             dst.SetPixel(j, i, Color.FromArgb(pixelColor.A, r, g, b));
                         }
                     Console.WriteLine("Loop " + (t + 1) + " complete");
-
-                    if (t == strokeValue - 1)
-                    {
-                        for (int i = 0; i < dst.Height; i++)
-                            for (int j = 0; j < dst.Width; j++)
-                            {
-                                Color pixelColor = dst.GetPixel(j, i);
-                                if (pixelColor.R + pixelColor.G + pixelColor.B < 100) dst.SetPixel(j, i, Color.FromArgb(255, 0, 0, 0));
-                                else if (src.GetPixel(j, i).A == 0) dst.SetPixel(j, i, Color.FromArgb(0, 255, 255, 255));
-                            }
-                        dst.Save(file.Replace(".jpg", "_new.png").Replace(".png", "_new.png"), ImageFormat.Png);
-                    }
                 }
+
+                for (int i = 0; i < dst.Height; i++)
+                    for (int j = 0; j < dst.Width; j++)
+                    {
+                        Color pixelColor = dst.GetPixel(j, i);
+                        if (pixelColor.R + pixelColor.G + pixelColor.B < 100) dst.SetPixel(j, i, Color.FromArgb(255, 0, 0, 0));
+                        else if (src.GetPixel(j, i).A == 0) dst.SetPixel(j, i, Color.FromArgb(0, 255, 255, 255));
+                    }
+                dst.Save(file.Replace(".jpg", "_new.png").Replace(".png", "_new.png"), ImageFormat.Png);
             }
         break;
 }

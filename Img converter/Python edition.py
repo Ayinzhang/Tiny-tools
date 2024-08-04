@@ -57,13 +57,12 @@ match cnt:
                             src[i, j, 1] = dst[i, j, 1] = src[i, j, 1] - num if src[i, j, 1] > num else 0
                             src[i, j, 2] = dst[i, j, 2] = src[i, j, 2] - num if src[i, j, 2] > num else 0
                     print("Loop " + str(t + 1) + " complete")
-                    if t == cnt - 1:
-                        for i in range(0, height):
-                            for j in range(0, width):
-                                if int(dst[i, j, 0]) + int(dst[i, j, 1]) + int(dst[i, j, 2]) < 100:
-                                    dst[i, j, 3] = 255
-                                elif channel == 4:
-                                    dst[i, j, 3] = src[i, j, 3]
-                        cv2.imwrite(file.replace(".jpg", "_new.jpg").replace(".png", "_new.png"), dst)
+                for i in range(0, height):
+                    for j in range(0, width):
+                        if int(dst[i, j, 0]) + int(dst[i, j, 1]) + int(dst[i, j, 2]) < 100:
+                            dst[i, j, 3] = 255
+                        elif channel == 4:
+                            dst[i, j, 3] = src[i, j, 3]
+                cv2.imwrite(file.replace(".jpg", "_new.jpg").replace(".png", "_new.png"), dst)
 print("Instruction finished")
 exit()

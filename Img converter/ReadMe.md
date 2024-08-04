@@ -1,4 +1,4 @@
-1. Move all JPG and PNG files to the source folder to be converted
+1. Move all JPG and PNG files to this folder to be converted
 
 2. Open the exe file, where 0 represents grayscale inversion, 1 represents transparent background, and 2 represents bold line draft.
     If it is a grayscale inversion operation, you need to input whether it is inverted (0 is No, 1 is Yes)
