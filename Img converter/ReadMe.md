@@ -1,3 +1,5 @@
+[中文版](README_zh.md)
+
 1. Move all JPG and PNG files to this folder to be converted
 
 2. Open the exe file, where 0 represents grayscale inversion, 1 represents transparent background, and 2 represents bold line draft.
